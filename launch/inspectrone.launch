@@ -1,0 +1,54 @@
+<launch>
+
+    <!-- start image streams (realsense node) -->
+    <include file="$(find realsense_streamer)/launch/realsense_streamer.launch">
+        <arg name="async"                   value="false"/>
+        <arg name="enable-depth"            value="true"/>
+        <arg name="enable-color"            value="true"/>
+        <arg name="enable-infra1"           value="true"/>
+        <arg name="enable-infra2"           value="true"/>
+        <arg name="enable-accel"            value="true"/>
+        <arg name="enable-gyro"             value="true"/>
+        <arg name="enable-button"           value="false"/>
+        <arg name="enable-ir-emitter"       value="false"/>
+        <arg name="enable-auto-exposure"    value="true"/>
+        
+        <arg name="depth-width"   value="640"/>
+        <arg name="depth-height"  value="480"/>
+        <arg name="depth-fps"     value="30"/>
+        
+        <arg name="color-width"   value="1920"/>
+        <arg name="color-height"  value="1080"/>
+        <arg name="color-fps"     value="30"/>
+        
+        <arg name="infra1-width"  value="640"/>
+        <arg name="infra1-height" value="480"/>
+        <arg name="infra1-fps"    value="30"/>
+        
+        <arg name="infra2-width"  value="640"/>
+        <arg name="infra2-height" value="480"/>
+        <arg name="infra2-fps"    value="30"/>
+        
+        <arg name="accel-fps"     value="250"/>
+        <arg name="gyro-fps"      value="400"/>
+        
+        <arg name="usb-port"      value="/dev/ttyACM0"/>
+        <arg name="config-path"   value="None"/>
+    </include>
+
+
+    <!-- start rosbag recording of relevant topics -->
+    <node name="rosbag" type="record" pkg="rosbag" output="screen" args="
+        -o $(find realsense_streamer)/data/
+        --split --duration=1m
+        -b 2048
+        /camera/color_image
+        /camera/infrared1_image
+        /camera/infrared2_image
+        /camera/depth_color_aligned_image" />
+
+    
+    <!-- start audio capture -->
+    <include file="$(find audio_capture)/launch/capture.launch"/>
+
+</launch>

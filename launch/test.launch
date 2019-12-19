@@ -1,0 +1,19 @@
+<launch>
+
+    <!-- start audio capture to file -->
+    <!--
+    <param name="start_time"     command="$(find realsense_streamer)/scripts/dt.py"/>
+    <param name="/audio/audio_capture/dst"  value="/home/recan/catkin_ws2/src/realsense_streamer/data/output.mp3"/> 
+    -->
+
+    <include file="$(find audio_capture)/launch/capture.launch">
+        <!-- <param name="/audio/audio_capture/dst"     command="$find(realsense_streamer)/data/$(date +%Y-%m-%d-%H-%M-%S)"/> -->
+        <!-- <param name="/audio/audio_capture/dst"     value="/home/recan/catkin_ws2/src/realsense_streamer/data/output.mp3"/> -->
+    </include>
+
+    <!-- start rosbag recording of relevant topics -->
+    <node name="rosbag" type="record" pkg="rosbag" output="screen" args="
+        -o $(find realsense_streamer)/data/
+        /audio/audio" />
+
+</launch>

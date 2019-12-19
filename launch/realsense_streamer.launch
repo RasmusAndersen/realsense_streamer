@@ -1,0 +1,73 @@
+<launch>
+    <!-- declare arg to be parsed in -->
+    <arg name="async"                 default="false"/>
+    <arg name="enable-depth"          default="true"/>
+    <arg name="enable-color"          default="true"/>
+    <arg name="enable-infra1"         default="true"/>
+    <arg name="enable-infra2"         default="true"/>
+    <arg name="enable-accel"          default="true"/>
+    <arg name="enable-gyro"           default="true"/>
+    <arg name="enable-button"         default="false"/>
+    <arg name="enable-ir-emitter"     default="true"/>
+    <arg name="enable-auto-exposure"  default="true"/>
+    
+    <arg name="depth-width"     default="640"/>
+    <arg name="depth-height"    default="480"/>
+    <arg name="depth-fps"       default="30"/>
+    
+    <arg name="color-width"     default="640"/>
+    <arg name="color-height"    default="480"/>
+    <arg name="color-fps"       default="30"/>
+    
+    <arg name="infra1-width"    default="640"/>
+    <arg name="infra1-height"   default="480"/>
+    <arg name="infra1-fps"      default="30"/>
+    
+    <arg name="infra2-width"    default="640"/>
+    <arg name="infra2-height"   default="480"/>
+    <arg name="infra2-fps"      default="30"/>
+    
+    <arg name="accel-fps"       default="250"/>
+    <arg name="gyro-fps"        default="200"/>
+    
+    <arg name="usb-port"        default="/dev/ttyACM0"/>
+    <arg name="config-path"     default="None"/>
+
+    <node pkg="realsense_streamer" type="realsense_streamer.py" name="realsense_streamer" output="screen">
+
+        <!-- parse the parameters -->
+        <param name="async"                 value="$(arg async)"/>
+        <param name="enable-depth"          value="$(arg enable-depth)"/>
+        <param name="enable-color"          value="$(arg enable-color)"/>
+        <param name="enable-infra1"         value="$(arg enable-infra1)"/>
+        <param name="enable-infra2"         value="$(arg enable-infra2)"/>
+        <param name="enable-accel"          value="$(arg enable-accel)"/>
+        <param name="enable-gyro"           value="$(arg enable-gyro)"/>
+        <param name="enable-button"         value="$(arg enable-button)"/>
+        <param name="enable-ir-emitter"     value="$(arg enable-ir-emitter)"/>
+        <param name="enable-auto-exposure"  value="$(arg enable-auto-exposure)"/>
+        
+        <param name="depth-width"   value="$(arg depth-width)"/>
+        <param name="depth-height"  value="$(arg depth-height)"/>
+        <param name="depth-fps"     value="$(arg depth-fps)"/>
+        
+        <param name="color-width"   value="$(arg color-width)"/>
+        <param name="color-height"  value="$(arg color-height)"/>
+        <param name="color-fps"     value="$(arg color-fps)"/>
+        
+        <param name="infra1-width"  value="$(arg infra1-width)"/>
+        <param name="infra1-height" value="$(arg infra1-height)"/>
+        <param name="infra1-fps"    value="$(arg infra1-fps)"/>
+        
+        <param name="infra2-width"  value="$(arg infra2-width)"/>
+        <param name="infra2-height" value="$(arg infra2-height)"/>
+        <param name="infra2-fps"    value="$(arg infra2-fps)"/>
+        
+        <param name="accel-fps"     value="$(arg accel-fps)"/>
+        <param name="gyro-fps"      value="$(arg gyro-fps)"/>
+        
+        <param name="usb-port"      value="$(arg usb-port)"/>
+        <param name="config-path"   value="$(arg config-path)"/>
+    </node>
+
+</launch>
